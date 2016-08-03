@@ -31,8 +31,10 @@ struct Voo {
 
 };
 
-map<string, vector<Aviao> > avioesDisponiveis;
-map<string ,vector<Aviao> >  avioesOperando;
+//no vetor de avioes vao ficar salvo os avioes em valores absolutas nao podendo deletar nenhum aviao
+map<string, vector<Aviao> > avioes;
+//o map de avioes disponiveis é apenas um artificio auxiliar para conseguir manipular a atribuiçoes de voos
+map<string ,vector<Aviao> >  avioesDisponiveis;
 map<int, vector<Voo> > agenda;
 vector<Individuo> individuos;
 vector<Individuo> aux;
@@ -60,16 +62,19 @@ void imprimiIndividuos();
 void imprimiIndividuo(Individuo ind);
 bool checkAirplanes();
 void montaAgenda();
+
 void imprimeAgenda();
 bool ordenaVoo(Voo a, Voo b);
 void preencheAgenda();
 bool comparaString(string a, string b);
 string trataString(string a);
+void imprimiFrotaAtribuida();
 
 int main() {
     lerArquivos(); //chamada da funcao para iniciar os parametros
     checkAirplanes();
     montaAgenda();
+    imprimiFrotaAtribuida();
     //imprimeAgenda();
 
     //imprimiIndividuos();
@@ -132,10 +137,6 @@ void lerArquivos() {
 
             }
             // ordena por ordem de partida
-
-         
-
-
         }
         myfile.close();
     } else cout << "Unable to open file";
@@ -200,7 +201,7 @@ bool ordenaVoo(Voo a, Voo b) {
 
 void imprimeAgenda() {
     // imprime a agenda semana
-    Voo aux;
+    //Voo aux;
     for (int i = 1; i <= 7; i++) {
         // imprimeVoo = agenda[i];
         cout << "dia da semanaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " << i << " \n";
@@ -218,6 +219,12 @@ void imprimeAgenda() {
         //imprimeVoo.clear();
     }
 
+}
+void imprimiAviao(Aviao a){
+    cout << "aeroportoAtual" <<a.aeroportoAtual;
+    cout << "" <<a.aeroportoAtual;
+    cout << "aeroportoAtual" <<a.aeroportoAtual;
+    cout << "aeroportoAtual" <<a.aeroportoAtual;
 }
 
 void imprimiIndividuo(Individuo ind) {
@@ -255,6 +262,7 @@ bool checkAirplanes() {
             aux.aeroportoAtual = "NONE";
             cout <<"Codigo do aviao " << tipo<< endl;
             avioesDisponiveis[tipo].push_back(aux);
+            avioes[tipo].push_back(aux);
         }
         myfile.close();
     } else cout << "Unable to open file";
@@ -284,6 +292,26 @@ bool comparaString(string a, string b) {
     return true;
 }
 
+void imprimiFrotaAtribuida(){
+    map<string, vector<Aviao> >::iterator it;
+    string aux;
+    vector<Aviao> auxAviao;
+    for(it = avioes.begin(); it != avioes.end(); it++){
+        aux = it->first;
+        cout << "Tipo do aviao " <<(string)(it->first) << endl;
+        auxAviao = it->second;
+        //imprimi
+        for(int i = 0; i < auxAviao.size(); i++ ){
+            imprimiAviao(auxAviao[i]);
+        }
+    }
+  //  cout << "tamanho dos avioes "<< avioes << endl;
+}
+
+
+
+
+
 void imprimiString(string a) {
     for (int i = 0; i < a.size(); i++) {
         cout << "[" << a[i] << "]";
@@ -300,14 +328,15 @@ void montaAgenda() {
         vooDia = agenda[dia];
         for (int vook = 0; vook < vooDia.size(); vook++) {
             //funcao rand fraca melhorar posteriormente
+            //cout << "debug "<< endl;
             int randNumber = rand() % avioesDisponiveis.size();
             string tipoAviao = agenda[dia][vook].tipoAviao;
             //verifica se os tipos dos avioes sao iguais
             //cout << "Disponiveis na frota " << avioesDisponiveis[tipoAviao].size() << endl;;
-            cout << "aviao escolhido" << avioesDisponiveis[tipoAviao][randNumber].codigo << endl;
-            avioesDisponiveis[tipoAviao][randNumber].aeroportoAtual;
-            //imprimiString(agenda[dia][vook].tipoAviao);
-            //imprimiString(avioesDisponiveis[randNumber].tipo);
+           // cout << "aviao escolhido" << avioesDisponiveis[tipoAviao][randNumber].codigo << endl;
+            //atribui ao aviao escolhido
+            avioes[tipoAviao][randNumber].vooRealizados.push_back(agenda[dia][vook].codigoVoo);
+            
 
         
              
