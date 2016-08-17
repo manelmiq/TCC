@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 
-
 using namespace std;
 
 struct Individuo {
@@ -9,7 +8,7 @@ struct Individuo {
     string codigoAviao;
     string origem;
     string destino;
-    string chegada;
+    string duracao;
     string partida;
 };
 
@@ -27,14 +26,14 @@ struct Voo {
     string destino;
     string tipoAviao;
     string codigoVoo;
-    string horaChegada;
+    string duracao;
 
 };
 
 //no vetor de avioes vao ficar salvo os avioes em valores absolutas nao podendo deletar nenhum aviao
 map<string, vector<Aviao> > avioes;
 //o map de avioes disponiveis é apenas um artificio auxiliar para conseguir manipular a atribuiçoes de voos
-map<string ,vector<Aviao> >  avioesDisponiveis;
+map<string, vector<Aviao> > avioesDisponiveis;
 map<int, vector<Voo> > agenda;
 vector<Individuo> individuos;
 vector<Individuo> aux;
@@ -74,8 +73,8 @@ int main() {
     lerArquivos(); //chamada da funcao para iniciar os parametros
     checkAirplanes();
     montaAgenda();
-    imprimiFrotaAtribuida();
-    //imprimeAgenda();
+   // imprimeAgenda();
+    // imprimiFrotaAtribuida();
 
     //imprimiIndividuos();
     //cout << individuos.size() << endl;
@@ -94,39 +93,32 @@ string trataString(string a) {
 void lerArquivos() {
     string line;
     //string ag, cA,cV,p, c,o, d;
-    ifstream myfile("VOOS1.txt");
+    ifstream myfile("VOO2.txt");
     Individuo teste;
-
+    int contador = 0;
     stringstream buffer;
     if (myfile.is_open()) {
-
-
         while (getline(myfile, line)) {
-
-            buffer.clear();
-            //imprimiString(line);
-            line = trataString(line);
-            //imprimiString(line);
+            //cout << "tamanho da linha " << line.size() << endl;
             buffer << line;
-
             buffer >> teste.agenda;
             buffer >> teste.codigoVoo;
             buffer >> teste.codigoAviao;
             buffer >> teste.origem;
             buffer >> teste.partida;
             buffer >> teste.destino;
-            buffer >> teste.chegada;
-
-
+            buffer >> teste.duracao;
+            contador++;
+            buffer.clear();
             individuos.push_back(teste);
             Voo vooAux;
             vooAux.codigoVoo = teste.codigoVoo;
             vooAux.destino = teste.destino;
-            vooAux.horaChegada = teste.chegada;
+            vooAux.duracao = teste.duracao;
             vooAux.horaPartida = teste.partida;
             vooAux.origem = teste.origem;
             vooAux.tipoAviao = teste.codigoAviao;
-           // imprimiString(vooAux.tipoAviao);
+            // imprimiString(vooAux.tipoAviao);
             //montar o cronograma
 
             for (int j = 1; j <= teste.agenda.size(); j++) {
@@ -136,11 +128,12 @@ void lerArquivos() {
                 }
 
             }
-            // ordena por ordem de partida
+            
+
         }
         myfile.close();
     } else cout << "Unable to open file";
-
+    cout << contador;
 
     for (int i = 1; i <= 7; i++) {
         vector<Voo> aux;
@@ -151,18 +144,19 @@ void lerArquivos() {
 
         agenda[i].clear();
         agenda[i] = aux;
-        /*
+
         for (int j = 0; j < aux.size(); j++) {
             cout << agenda[i][j].codigoVoo << " ";
             cout << agenda[i][j].destino << " ";
-            cout << agenda[i][j].horaChegada << "-> ";
+            cout << agenda[i][j].duracao << "-> ";
             cout << agenda[i][j].horaPartida << " ";
             cout << agenda[i][j].tipoAviao << endl;
         }
-         * */
+
 
 
     }
+
 
 }
 
@@ -210,7 +204,7 @@ void imprimeAgenda() {
         for (int k = 0; k < agenda[i].size(); ++k) {
             cout << agenda[i][k].codigoVoo << " ";
             cout << agenda[i][k].destino << " ";
-            cout << agenda[i][k].horaChegada << " ";
+            cout << agenda[i][k].duracao << " ";
             cout << agenda[i][k].horaPartida << " ";
             cout << agenda[i][k].tipoAviao << endl;
         }
@@ -220,11 +214,17 @@ void imprimeAgenda() {
     }
 
 }
-void imprimiAviao(Aviao a){
-    cout << "aeroportoAtual" <<a.aeroportoAtual;
-    cout << "" <<a.aeroportoAtual;
-    cout << "aeroportoAtual" <<a.aeroportoAtual;
-    cout << "aeroportoAtual" <<a.aeroportoAtual;
+
+void imprimiAviao(Aviao a) {
+    cout << "aeroportoAtual " << a.aeroportoAtual << endl;
+    cout << "codigo do aviao " << a.codigo << endl;
+    cout << "voo inuteis" << a.vooInuteis << endl;
+    cout << "voos realizados" << endl;
+    for (int i = 0; i < a.vooRealizados.size(); i++) {
+        cout << a.vooRealizados[i] << " ";
+
+    }
+    cout << endl;
 }
 
 void imprimiIndividuo(Individuo ind) {
@@ -232,7 +232,7 @@ void imprimiIndividuo(Individuo ind) {
     cout << ind.codigoAviao << endl;
     cout << ind.codigoVoo << endl;
     cout << ind.partida << endl;
-    cout << ind.chegada << endl;
+    cout << ind.duracao << endl;
 
 
 }
@@ -244,7 +244,7 @@ void imprimiIndividuos() {
 }
 
 bool checkAirplanes() {
-    
+
     ifstream myfile("AVIOES.txt");
     string line, codigo, tipo;
     stringstream buffer;
@@ -260,7 +260,8 @@ bool checkAirplanes() {
             aux.codigo = codigo;
             aux.tipo = tipo;
             aux.aeroportoAtual = "NONE";
-            cout <<"Codigo do aviao " << tipo<< endl;
+            aux.vooInuteis = 0;
+            //cout <<"Codigo do aviao " << tipo<< endl;
             avioesDisponiveis[tipo].push_back(aux);
             avioes[tipo].push_back(aux);
         }
@@ -292,25 +293,21 @@ bool comparaString(string a, string b) {
     return true;
 }
 
-void imprimiFrotaAtribuida(){
+void imprimiFrotaAtribuida() {
     map<string, vector<Aviao> >::iterator it;
     string aux;
     vector<Aviao> auxAviao;
-    for(it = avioes.begin(); it != avioes.end(); it++){
+    for (it = avioes.begin(); it != avioes.end(); it++) {
         aux = it->first;
-        cout << "Tipo do aviao " <<(string)(it->first) << endl;
+        cout << "Tipo do aviao " << (string) (it->first) << endl;
         auxAviao = it->second;
         //imprimi
-        for(int i = 0; i < auxAviao.size(); i++ ){
+        for (int i = 0; i < auxAviao.size(); i++) {
             imprimiAviao(auxAviao[i]);
         }
     }
-  //  cout << "tamanho dos avioes "<< avioes << endl;
+    //  cout << "tamanho dos avioes "<< avioes << endl;
 }
-
-
-
-
 
 void imprimiString(string a) {
     for (int i = 0; i < a.size(); i++) {
@@ -322,28 +319,41 @@ void imprimiString(string a) {
 }
 
 void montaAgenda() {
+    int contador = 0;
     //
     for (int dia = 1; dia <= 7; dia++) {
-        vector<Voo> vooDia;
-        vooDia = agenda[dia];
+        vector<Voo> vooDia; // vetor auxiliar para manipular os dias
+
+        vooDia = agenda[dia]; // cada map de int, vector de voos representa um dia
+
+        vector< Aviao> ::iterator it; // iterator auxiliar pra operaçẽos no vector
+
+
+        //varre todos os voos do dia
         for (int vook = 0; vook < vooDia.size(); vook++) {
-            //funcao rand fraca melhorar posteriormente
-            //cout << "debug "<< endl;
-            int randNumber = rand() % avioesDisponiveis.size();
+            contador++;
             string tipoAviao = agenda[dia][vook].tipoAviao;
+            // funcao random para gerar numeros aleatorios de forma rapida
+            std::random_device rd; // only used once to initialise (seed) engine
+            std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)  
+            std::uniform_int_distribution<int> uni(0, avioesDisponiveis[tipoAviao].size());
+            auto randNumber = uni(rng);
+            cout << "numero randomico " << randNumber << endl;
             //verifica se os tipos dos avioes sao iguais
             //cout << "Disponiveis na frota " << avioesDisponiveis[tipoAviao].size() << endl;;
-           // cout << "aviao escolhido" << avioesDisponiveis[tipoAviao][randNumber].codigo << endl;
+            // cout << "aviao escolhido" << avioesDisponiveis[tipoAviao][randNumber].codigo << endl;
             //atribui ao aviao escolhido
+            it = avioesDisponiveis[tipoAviao].begin();
             avioes[tipoAviao][randNumber].vooRealizados.push_back(agenda[dia][vook].codigoVoo);
-            
+            //avioesDisponiveis[tipoAviao].erase();
 
-        
-             
+
+
             cout << endl;
 
         }
     }
+    cout << contador;
 }
 
 
