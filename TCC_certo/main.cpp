@@ -81,12 +81,15 @@ void preencheAgenda();
 bool comparaString(string a, string b);
 string trataString(string a);
 void imprimiFrotaAtribuida();
+void imprimi_avioes();
+
+void imprimiAviao(Aviao a) ;
 string calcula_Hora_chegada(string d, string h, int dia);
 
 int main() {
     lerArquivos(); //chamada da funcao para iniciar os parametros
     checkAirplanes();
-    imprimiFrotaAtribuida();
+    //imprimiFrotaAtribuida();
     /*
 
     aviao_essencial aux;
@@ -99,6 +102,7 @@ int main() {
     //imprimiFrotaAtribuida();
 
     montaAgenda();
+    imprimi_avioes();
     //imprimiFrotaAtribuida();
     //imprimeAgenda();
     //apagaAvioesDisponiveis(0);
@@ -107,6 +111,22 @@ int main() {
     //imprimiIndividuos();
     //cout << individuos.size() << endl;
 }
+void imprimi_avioes(){
+    map<string, vector<Aviao> >::iterator it;
+    vector<Aviao> auxAviao;
+    for (it = avioes.begin(); it != avioes.end(); it++) {
+        cout <<"tipo aviao " <<it->first << endl;
+        auxAviao = it->second;
+        int tam = auxAviao.size();
+        for(int i = 0; i < tam ; i++){
+            imprimiAviao(auxAviao[i]);
+            
+        }
+      
+    }
+    
+}
+
 
 string trataString(string a) {
     string b = "";
@@ -234,11 +254,11 @@ string calcula_Hora_chegada(string d, string h, int dia) {
 }
 
 void mostra_avioes_operacao() {
-    cout << "avioes que vao voltar \n";
+    //cout << "avioes que vao voltar \n";
     map<string, vector<aviao_essencial> >::iterator it;
     for (it = marca_volta.begin(); it != marca_volta.end(); it++) {
-        cout << "tempo = " << it->first;
-        cout << " cod=";
+      //  cout << "tempo = " << it->first;
+        //cout << " cod=";
         vector<aviao_essencial> hue;
         hue = it->second;
         for (int i = 0; i < hue.size(); i++) {
@@ -385,9 +405,11 @@ void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, st
     for (int i = 0; i < tam; i++) {
         if (avioes[TipoAviao][i].codigo == codigoAviao) {
             avioes[TipoAviao][i].vooRealizados.push_back(codigoVoo);
-            if (avioes[TipoAviao][i].aeroportoAtual != AeroportoDoVoo) {
+            if (avioes[TipoAviao][i].aeroportoAtual.compare(AeroportoDoVoo) !=0 ) {
                 avioes[TipoAviao][i].vooInuteis++;
+               
             }
+             avioes[TipoAviao][i].aeroportoAtual = AeroportoDoVoo;
         }
     }
 
@@ -396,6 +418,7 @@ void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, st
 
 void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
 
+    /*
     cout << "\n\n\n--------comeco da funcaooo-----\n";
     cout << "TEEEMPOO INICIO = " << tempo_inicio << "TEMPO FIM " << tempo_fim << endl;
     cout << "avioes operando \n";
@@ -403,6 +426,7 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
     cout << "\n\n";
     cout << "frota antes de verificar \n";
     imprimiFrotaAtribuida();
+    */
 
     int hora_inicio = stoi(tempo_inicio);
     int hora_fim = stoi(tempo_fim);
@@ -451,9 +475,9 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
 
         }
     }
-    cout << "frota no fim da funcao \n\n";
-    imprimiFrotaAtribuida();
-    cout << "-------fim da funcao -----------------\n";
+    //cout << "frota no fim da funcao \n\n";
+    //imprimiFrotaAtribuida();
+    //cout << "-------fim da funcao -----------------\n";
 }
 
 void montaAgenda() {
@@ -503,9 +527,9 @@ void montaAgenda() {
             volta += agenda[dia][vook].horaChegada;
             // apaga de avioes disponiveis
             int tam = avioesDisponiveis[tipoAviao].size();
-            cout << tipoAviao << endl;
-            cout << "posicao sorteada para apagar " << randNumber - 1 <<
-                    avioesDisponiveis[tipoAviao][randNumber - 1].codigo << "\n";
+         //   cout << tipoAviao << endl;
+       //     cout << "posicao sorteada para apagar " << randNumber - 1 <<
+                  //  avioesDisponiveis[tipoAviao][randNumber - 1].codigo << "\n";
             avioesDisponiveis[tipoAviao].erase(avioesDisponiveis[tipoAviao].begin() + (randNumber - 1));
             aviao_essencial X;
             X.codigo = codigoA;
