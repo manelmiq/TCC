@@ -26,3 +26,5 @@
 *.exe
 *.out
 *.app
+/TCC_certo/dist/
+/TCC_certo/build/

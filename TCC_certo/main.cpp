@@ -33,17 +33,21 @@ struct Voo {
 
 };
 
+struct aviao_essencial {
+    string codigo;
+    string tipo;
+};
+
 //no vetor de avioes vao ficar salvo os avioes em valores absolutas nao podendo deletar nenhum aviao
 map<string, vector<Aviao> > avioes;
 //o map de avioes disponiveis é apenas um artificio auxiliar para conseguir manipular a atribuiçoes de voos
 map<string, vector<Aviao> > avioesDisponiveis;
 
-map<string, vector<string> > marca_volta;
+map<string, vector<aviao_essencial> > marca_volta;
 map<int, vector<Voo> > agenda;
 vector<Individuo> individuos;
-vector<Individuo> aux;
 int proximo_dia;
-string hora="0000";
+string hora = "0000";
 
 void iniciaParametros() {
     int numeroGeracoes;
@@ -67,6 +71,7 @@ void correcaoIndividuo();
 void lerArquivos();
 void imprimiIndividuos();
 void imprimiIndividuo(Individuo ind);
+void mostra_avioes_operacao();
 bool checkAirplanes();
 void montaAgenda();
 void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim);
@@ -78,19 +83,27 @@ string trataString(string a);
 void imprimiFrotaAtribuida();
 string calcula_Hora_chegada(string d, string h, int dia);
 
-
-
-
 int main() {
     lerArquivos(); //chamada da funcao para iniciar os parametros
-    
     checkAirplanes();
+    imprimiFrotaAtribuida();
+    /*
+
+    aviao_essencial aux;
+    aux.codigo ="blabla";
+    aux.tipo= "E190";
+    marca_volta["92047"].push_back(aux);
+    marca_volta["92047"].push_back(aux);
+    insere_de_volta_disponiveis("92045", "2100");
+     */
     //imprimiFrotaAtribuida();
+
     montaAgenda();
     //imprimiFrotaAtribuida();
     //imprimeAgenda();
     //apagaAvioesDisponiveis(0);
-    
+
+
     //imprimiIndividuos();
     //cout << individuos.size() << endl;
 }
@@ -107,8 +120,8 @@ string trataString(string a) {
 /*funcao que armazena nos vetores globais os valores de VOOS*/
 void lerArquivos() {
     string line;
-    
-    
+
+
     //string ag, cA,cV,p, c,o, d;
     ifstream myfile("VOO2.txt");
     Individuo teste;
@@ -138,20 +151,20 @@ void lerArquivos() {
 
 
             for (int j = 0; j < teste.diasDaSemana.size(); j++) {
-                if (teste.diasDaSemana[j] != '0') {            
-                    vooAux.horaChegada = calcula_Hora_chegada(vooAux.duracao, vooAux.horaPartida ,j+1);
-                    vooAux.dia_partida = j+1;
+                if (teste.diasDaSemana[j] != '0') {
+                    vooAux.horaChegada = calcula_Hora_chegada(vooAux.duracao, vooAux.horaPartida, j + 1);
+                    vooAux.dia_partida = j + 1;
                     vooAux.dia_chegada = proximo_dia;
-                    agenda[j+1].push_back(vooAux);
+                    agenda[j + 1].push_back(vooAux);
                 }
 
             }
-            
+
 
         }
         myfile.close();
     } else cout << "Unable to open file";
-    
+
 
     for (int i = 1; i <= 7; i++) {
         vector<Voo> aux;
@@ -175,8 +188,8 @@ void lerArquivos() {
             
         }
          */
-     
-        
+
+
 
 
     }
@@ -186,38 +199,52 @@ void lerArquivos() {
 
 //ordena os voos por hora de partida
 
-string calcula_Hora_chegada(string d, string h, int dia){
-        
+string calcula_Hora_chegada(string d, string h, int dia) {
+
     int minutostotais = 0;
     proximo_dia = dia;
-    string horas= h.substr(0,2);
-    string minutos= h.substr(2,h.size());
+    string horas = h.substr(0, 2);
+    string minutos = h.substr(2, h.size());
     minutostotais += stoi(minutos);
     int horatotais = stoi(horas);
     horatotais *= 60;
     minutostotais += horatotais;
-   
-    string horas_duracao= d.substr(0,2);
-    string minutos_duracao= d.substr(2,h.size());
+
+    string horas_duracao = d.substr(0, 2);
+    string minutos_duracao = d.substr(2, h.size());
     minutostotais += stoi(minutos_duracao);
     int horatotais_duracao = stoi(horas_duracao);
     horatotais_duracao *= 60;
     minutostotais += horatotais_duracao;
-    
-    int hora_chegada = (int)((minutostotais)/60);
-    if(hora_chegada>=24){
+
+    int hora_chegada = (int) ((minutostotais) / 60);
+    if (hora_chegada >= 24) {
         proximo_dia++;
-        hora_chegada%=24;
+        hora_chegada %= 24;
     }
     int minutos_chegada = minutostotais % 60;
-    string hora_certa = to_string((int)hora_chegada);
-    if(hora_certa.size()==1){
-        hora_certa ="0"+hora_certa;
+    string hora_certa = to_string((int) hora_chegada);
+    if (hora_certa.size() == 1) {
+        hora_certa = "0" + hora_certa;
     }
     hora_certa += to_string(minutos_chegada);
-     
-    
-    return  hora_certa;
+
+
+    return hora_certa;
+}
+
+void mostra_avioes_operacao() {
+    cout << "avioes que vao voltar \n";
+    map<string, vector<aviao_essencial> >::iterator it;
+    for (it = marca_volta.begin(); it != marca_volta.end(); it++) {
+        cout << "tempo = " << it->first;
+        cout << " cod=";
+        vector<aviao_essencial> hue;
+        hue = it->second;
+        for (int i = 0; i < hue.size(); i++) {
+            cout << hue[i].codigo << " tipo" << hue[i].tipo << endl;
+        }
+    }
 }
 
 bool ordenaVoo(Voo a, Voo b) {
@@ -253,11 +280,11 @@ void imprimeAgenda() {
         cout << "dia da semanaXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " << i << " \n";
         cout << agenda[i].size() << " \n";
         for (int k = 0; k < agenda[i].size(); ++k) {
-            cout <<"Codigo->" << agenda[i][k].codigoVoo << " ";
-            cout <<"Destino->"<< agenda[i][k].destino << " ";
-            cout <<"Duracao->" << agenda[i][k].duracao << " ";
-            cout <<"HoraPartida->" <<agenda[i][k].horaPartida << " ";
-            cout <<"TipoAviao->" << agenda[i][k].tipoAviao << endl;
+            cout << "Codigo->" << agenda[i][k].codigoVoo << " ";
+            cout << "Destino->" << agenda[i][k].destino << " ";
+            cout << "Duracao->" << agenda[i][k].duracao << " ";
+            cout << "HoraPartida->" << agenda[i][k].horaPartida << " ";
+            cout << "TipoAviao->" << agenda[i][k].tipoAviao << endl;
         }
         //imprimeVoo.clear();
     }
@@ -328,30 +355,20 @@ bool checkAirplanes() {
 // função que simula a criaçao de uma agenda semana de voo
 
 bool comparaString(string a, string b) {
-    for (int i = 0; i < a.size(); i++) {
-        if (a[i] != b[i]) {
-            cout << "diferentes em  " << a[i] << " e" << b[i] << "||" << endl;
-            return false;
-        }
-    }
-
     return true;
 }
 
 void imprimiFrotaAtribuida() {
     map<string, vector<Aviao> >::iterator it;
-    string aux;
     vector<Aviao> auxAviao;
-    cout <<"frota atribuida xxxx\n";
-    it=avioesDisponiveis.find("AT72");
-    auxAviao = it->second;
-    for(int i = 0; i <auxAviao.size(); i++){
-        cout << auxAviao[i].codigo << "[" << i <<"]\n";
+    for (it = avioesDisponiveis.begin(); it != avioesDisponiveis.end(); it++) {
+
+        auxAviao = it->second;
+        int tam = auxAviao.size();
+        cout << "tipo ->" << it->first << "tamanho[" <<tam  << "]\n";
+
     }
-
 }
-
-
 
 void imprimiString(string a) {
     for (int i = 0; i < a.size(); i++) {
@@ -361,48 +378,104 @@ void imprimiString(string a) {
     cout << endl;
 }
 
-void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo){
-    
+void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo) {
+
     // busca sequencial N*log(N) onde N é o numero de avioes do Tipo que chamou a funcao
     int tam = avioes[TipoAviao].size();
-    for(int i = 0; i < tam; i++){        
-        if(avioes[TipoAviao][i].codigo == codigoAviao){
+    for (int i = 0; i < tam; i++) {
+        if (avioes[TipoAviao][i].codigo == codigoAviao) {
             avioes[TipoAviao][i].vooRealizados.push_back(codigoVoo);
-            if(avioes[TipoAviao][i].aeroportoAtual != AeroportoDoVoo){
+            if (avioes[TipoAviao][i].aeroportoAtual != AeroportoDoVoo) {
                 avioes[TipoAviao][i].vooInuteis++;
             }
-        }        
+        }
     }
-} 
-void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim){
-    cout <<"tempo inicio "<<tempo_inicio <<" e fim " << tempo_fim << endl;
-    
-    
+
+
 }
 
+void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
 
+    cout << "\n\n\n--------comeco da funcaooo-----\n";
+    cout << "TEEEMPOO INICIO = " << tempo_inicio << "TEMPO FIM " << tempo_fim << endl;
+    cout << "avioes operando \n";
+    mostra_avioes_operacao();
+    cout << "\n\n";
+    cout << "frota antes de verificar \n";
+    imprimiFrotaAtribuida();
 
+    int hora_inicio = stoi(tempo_inicio);
+    int hora_fim = stoi(tempo_fim);
+    int minuto_inicio = stoi(tempo_inicio);
+    int minuto_fim = stoi(tempo_fim);
+    int dia_atual = stoi(tempo_inicio);
+    minuto_inicio = minuto_inicio % 100;
+    minuto_fim = minuto_fim % 100;
+    hora_inicio = (hora_inicio / 100) % 100;
+    hora_fim = ((hora_fim) / 100) % 100;
+    dia_atual /= 10000;
+
+    while (true) {
+
+        if ((hora_inicio == hora_fim) && (minuto_inicio == minuto_fim)) {
+            break;
+        } else {
+            string volta = to_string(minuto_inicio);
+            if (volta.size() == 1) {
+                volta = "0" + volta;
+            }
+            volta = to_string(hora_inicio) + volta;
+            if (volta.size() == 3) {
+                volta = "0" + volta;
+            }
+            volta = to_string(dia_atual) + volta;
+            map<string, vector<aviao_essencial> >::iterator it;
+            it = marca_volta.find(volta);
+            if (it != marca_volta.end()) {
+
+                vector<aviao_essencial> aux;
+                aux = it->second;
+                for (int i = 0; i < aux.size(); i++) {
+                    aviao_essencial aux2;
+                    aux2 = aux[i];
+                    Aviao Aux3;
+                    Aux3.codigo = aux2.codigo;
+                    avioesDisponiveis[aux2.tipo].push_back(Aux3);
+                }
+            }
+            minuto_inicio++;
+            if (minuto_inicio == 60) {
+                hora_inicio++;
+                minuto_inicio = 0;
+            }
+
+        }
+    }
+    cout << "frota no fim da funcao \n\n";
+    imprimiFrotaAtribuida();
+    cout << "-------fim da funcao -----------------\n";
+}
 
 void montaAgenda() {
     int contador = 0;
-    
+
     vector<Aviao> AviaoAux;
     map<string, vector<Aviao> >::iterator it2;
 
-   
+
     for (int dia = 1; dia <= 8; dia++) {
-        
-        
+
+
         vector<Voo> vooDia; // vetor auxiliar para manipular os dias
         vooDia = agenda[dia]; // cada map de int, vector de voos representa um dia
         vector< Aviao>::iterator it; // iterator auxiliar pra operaçẽos no vector
         //varre todos os voos do dia
-        string hora_inicial ="0000";
+        string hora_inicial = "0000";
         string tempo_inicial = to_string(dia);
-        tempo_inicial = tempo_inicial+hora_inicial;
+        tempo_inicial = tempo_inicial + hora_inicial;
         for (int vook = 0; vook < vooDia.size(); vook++) {
-            
-            
+
+
             insere_de_volta_disponiveis(tempo_inicial, agenda[dia][vook].horaPartida);
             string tipoAviao = agenda[dia][vook].tipoAviao;
             // funcao random para gerar numeros aleatorios de forma rapida
@@ -414,9 +487,9 @@ void montaAgenda() {
             // busca os avioes nos avioes disponiveis
 
             it2 = avioesDisponiveis.find(tipoAviao);
-            AviaoAux = it2->second;            
+            AviaoAux = it2->second;
             Aviao Av;
-            Av = AviaoAux[randNumber-1];
+            Av = AviaoAux[randNumber - 1];
 
             //cria variaveis para inserir no vetor de avioes absolutos
             string codigoA, codigoV;
@@ -430,27 +503,20 @@ void montaAgenda() {
             volta += agenda[dia][vook].horaChegada;
             // apaga de avioes disponiveis
             int tam = avioesDisponiveis[tipoAviao].size();
-            imprimiFrotaAtribuida();
             cout << tipoAviao << endl;
-            cout <<"posicao sorteada para apagar " << randNumber-1 <<
-                    avioesDisponiveis[tipoAviao][randNumber-1].codigo << "\n";
-            avioesDisponiveis[tipoAviao].erase(avioesDisponiveis[tipoAviao].begin() + (randNumber -1));
-            imprimiFrotaAtribuida();
-            marca_volta[volta].push_back(codigoA);        
-            
-           
+            cout << "posicao sorteada para apagar " << randNumber - 1 <<
+                    avioesDisponiveis[tipoAviao][randNumber - 1].codigo << "\n";
+            avioesDisponiveis[tipoAviao].erase(avioesDisponiveis[tipoAviao].begin() + (randNumber - 1));
+            aviao_essencial X;
+            X.codigo = codigoA;
+            X.tipo = tipoAviao;
+            marca_volta[volta].push_back(X);
+            tempo_inicial = to_string(dia) + agenda[dia][vook].horaPartida;
+
+
         }
-        
+        insere_de_volta_disponiveis(tempo_inicial, "2359");
+
     }
     cout << "numero de voos realizados " << contador;
 }
-
-
-
-
-
-
-
-
-
-

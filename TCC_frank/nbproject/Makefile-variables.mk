@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=tcc
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/tcc
+CND_ARTIFACT_NAME_Debug=tcc_frank
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/tcc_frank
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=tcc.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/tcc.tar
+CND_PACKAGE_NAME_Debug=tccfrank.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/tccfrank.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=tcc
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/tcc
+CND_ARTIFACT_NAME_Release=tcc_frank
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/tcc_frank
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=tcc.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/tcc.tar
+CND_PACKAGE_NAME_Release=tccfrank.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/tccfrank.tar
 #
 # include compiler specific variables
 #
