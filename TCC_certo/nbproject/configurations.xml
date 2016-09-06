@@ -11,6 +11,7 @@
       <itemPath>/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOO2.txt</itemPath>
       <itemPath>/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOOS.txt</itemPath>
       <itemPath>/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOOS1.txt</itemPath>
+      <itemPath>/home/emmanuell/NetBeansProjects/TCC_certo/ga.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -45,6 +46,11 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="/home/emmanuell/NetBeansProjects/TCC_certo/ga.cpp"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOO2.txt"
             ex="false"
             tool="3"
@@ -84,6 +90,11 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="/home/emmanuell/NetBeansProjects/TCC_certo/ga.cpp"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
       <item path="/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOO2.txt"
             ex="false"
             tool="3"

@@ -1,364 +1,208 @@
-AZU5141 SBLO -> Duracao 0104-> Partida0023dia 1-> chegada0127 dia1 AT72
-AZU5132 SBGR -> Duracao 0050-> Partida0111dia 1-> chegada021 dia1 E190
-AZU5127 SBSV -> Duracao 0123-> Partida0131dia 1-> chegada0254 dia1 E190
-AZU5131 SBKP -> Duracao 0048-> Partida0850dia 1-> chegada0938 dia1 AT72
-AZU5126 SBCF -> Duracao 0134-> Partida0852dia 1-> chegada1026 dia1 E190
-AZU5140 SBCT -> Duracao 0045-> Partida1005dia 1-> chegada1050 dia1 AT72
-AZU5112 SBMG -> Duracao 0129-> Partida1114dia 1-> chegada1243 dia1 AT72
-AZU5113 SBKP -> Duracao 0116-> Partida1320dia 1-> chegada1436 dia1 AT72
-AZU5121 SBKP -> Duracao 0103-> Partida1335dia 1-> chegada1438 dia1 AT72
-AZU5138 SBPF -> Duracao 0122-> Partida1422dia 1-> chegada1544 dia1 E190
-AZU5122 SBCA -> Duracao 0148-> Partida1558dia 1-> chegada1746 dia1 AT72
-AZU5108 SBCT -> Duracao 0052-> Partida1559dia 1-> chegada1651 dia1 E190
-AZU5139 SBKP -> Duracao 0108-> Partida1625dia 1-> chegada1733 dia1 E190
-AZU5110 SBBR -> Duracao 0122-> Partida1640dia 1-> chegada182 dia1 E190
-AZU5129 SBCT -> Duracao 0045-> Partida1745dia 1-> chegada1830 dia1 AT72
-AZU5109 SBCF -> Duracao 0114-> Partida1828dia 1-> chegada1942 dia1 E190
-AZU5114 SBRJ -> Duracao 0044-> Partida1914dia 1-> chegada1958 dia1 E190
-AZU5123 SBKP -> Duracao 0142-> Partida1923dia 1-> chegada215 dia1 AT72
-AZU5130 SBAE -> Duracao 0048-> Partida2325dia 1-> chegada0013 dia2 AT72
-AZU5141 SBLO -> Duracao 0104-> Partida0023dia 2-> chegada0127 dia2 AT72
-AZU5132 SBGR -> Duracao 0050-> Partida0111dia 2-> chegada021 dia2 E190
-AZU5127 SBSV -> Duracao 0123-> Partida0131dia 2-> chegada0254 dia2 E190
-AZU5131 SBKP -> Duracao 0048-> Partida0850dia 2-> chegada0938 dia2 AT72
-AZU5126 SBCF -> Duracao 0134-> Partida0852dia 2-> chegada1026 dia2 E190
-AZU5140 SBCT -> Duracao 0045-> Partida1005dia 2-> chegada1050 dia2 AT72
-AZU5112 SBMG -> Duracao 0129-> Partida1114dia 2-> chegada1243 dia2 AT72
-AZU5113 SBKP -> Duracao 0116-> Partida1320dia 2-> chegada1436 dia2 AT72
-AZU5121 SBKP -> Duracao 0103-> Partida1335dia 2-> chegada1438 dia2 AT72
-AZU5138 SBPF -> Duracao 0122-> Partida1422dia 2-> chegada1544 dia2 E190
-AZU5122 SBCA -> Duracao 0148-> Partida1558dia 2-> chegada1746 dia2 AT72
-AZU5108 SBCT -> Duracao 0052-> Partida1559dia 2-> chegada1651 dia2 E190
-AZU5139 SBKP -> Duracao 0108-> Partida1625dia 2-> chegada1733 dia2 E190
-AZU5110 SBBR -> Duracao 0122-> Partida1640dia 2-> chegada182 dia2 E190
-AZU5129 SBCT -> Duracao 0045-> Partida1745dia 2-> chegada1830 dia2 AT72
-AZU5119 SBCF -> Duracao 0114-> Partida1828dia 2-> chegada1942 dia2 E190
-AZU5114 SBRJ -> Duracao 0044-> Partida1914dia 2-> chegada1958 dia2 E190
-AZU5123 SBKP -> Duracao 0142-> Partida1923dia 2-> chegada215 dia2 AT72
-AZU5130 SBAE -> Duracao 0048-> Partida2325dia 2-> chegada0013 dia3 AT72
-AZU5141 SBLO -> Duracao 0104-> Partida0023dia 3-> chegada0127 dia3 AT72
-AZU5132 SBGR -> Duracao 0050-> Partida0111dia 3-> chegada021 dia3 E190
-AZU5127 SBSV -> Duracao 0123-> Partida0131dia 3-> chegada0254 dia3 E190
-AZU5131 SBKP -> Duracao 0048-> Partida0850dia 3-> chegada0938 dia3 AT72
-AZU5126 SBCF -> Duracao 0134-> Partida0852dia 3-> chegada1026 dia3 E190
-AZU5140 SBCT -> Duracao 0045-> Partida1005dia 3-> chegada1050 dia3 AT72
-AZU5112 SBMG -> Duracao 0129-> Partida1114dia 3-> chegada1243 dia3 AT72
-AZU5113 SBKP -> Duracao 0116-> Partida1320dia 3-> chegada1436 dia3 AT72
-AZU5121 SBKP -> Duracao 0103-> Partida1335dia 3-> chegada1438 dia3 AT72
-AZU5138 SBPF -> Duracao 0122-> Partida1422dia 3-> chegada1544 dia3 E190
-AZU5122 SBCA -> Duracao 0148-> Partida1558dia 3-> chegada1746 dia3 AT72
-AZU5108 SBCT -> Duracao 0052-> Partida1559dia 3-> chegada1651 dia3 E190
-AZU5139 SBKP -> Duracao 0108-> Partida1625dia 3-> chegada1733 dia3 E190
-AZU5110 SBBR -> Duracao 0122-> Partida1640dia 3-> chegada182 dia3 E190
-AZU5129 SBCT -> Duracao 0045-> Partida1745dia 3-> chegada1830 dia3 AT72
-AZU5119 SBCF -> Duracao 0114-> Partida1828dia 3-> chegada1942 dia3 E190
-AZU5114 SBRJ -> Duracao 0044-> Partida1914dia 3-> chegada1958 dia3 E190
-AZU5123 SBKP -> Duracao 0142-> Partida1923dia 3-> chegada215 dia3 AT72
-AZU5130 SBAE -> Duracao 0048-> Partida2325dia 3-> chegada0013 dia4 AT72
-AZU5141 SBLO -> Duracao 0104-> Partida0023dia 4-> chegada0127 dia4 AT72
-AZU5132 SBGR -> Duracao 0050-> Partida0111dia 4-> chegada021 dia4 E190
-AZU5127 SBSV -> Duracao 0123-> Partida0131dia 4-> chegada0254 dia4 E190
-AZU5131 SBKP -> Duracao 0048-> Partida0850dia 4-> chegada0938 dia4 AT72
-AZU5126 SBCF -> Duracao 0134-> Partida0852dia 4-> chegada1026 dia4 E190
-AZU5140 SBCT -> Duracao 0045-> Partida1005dia 4-> chegada1050 dia4 AT72
-AZU5112 SBMG -> Duracao 0129-> Partida1114dia 4-> chegada1243 dia4 AT72
-AZU5113 SBKP -> Duracao 0116-> Partida1320dia 4-> chegada1436 dia4 AT72
-AZU5121 SBKP -> Duracao 0103-> Partida1335dia 4-> chegada1438 dia4 AT72
-AZU5138 SBPF -> Duracao 0122-> Partida1422dia 4-> chegada1544 dia4 E190
-AZU5122 SBCA -> Duracao 0148-> Partida1558dia 4-> chegada1746 dia4 AT72
-AZU5108 SBCT -> Duracao 0052-> Partida1559dia 4-> chegada1651 dia4 E190
-AZU5139 SBKP -> Duracao 0108-> Partida1625dia 4-> chegada1733 dia4 E190
-AZU5110 SBBR -> Duracao 0122-> Partida1640dia 4-> chegada182 dia4 E190
-AZU5129 SBCT -> Duracao 0045-> Partida1745dia 4-> chegada1830 dia4 AT72
-AZU5119 SBCF -> Duracao 0114-> Partida1828dia 4-> chegada1942 dia4 E190
-AZU5114 SBRJ -> Duracao 0044-> Partida1914dia 4-> chegada1958 dia4 E190
-AZU5123 SBKP -> Duracao 0142-> Partida1923dia 4-> chegada215 dia4 AT72
-AZU5130 SBAE -> Duracao 0048-> Partida2325dia 4-> chegada0013 dia5 AT72
-AZU5141 SBLO -> Duracao 0104-> Partida0023dia 5-> chegada0127 dia5 AT72
-AZU5132 SBGR -> Duracao 0050-> Partida0111dia 5-> chegada021 dia5 E190
-AZU5127 SBSV -> Duracao 0123-> Partida0131dia 5-> chegada0254 dia5 E190
-AZU5131 SBKP -> Duracao 0048-> Partida0850dia 5-> chegada0938 dia5 AT72
-AZU5126 SBCF -> Duracao 0134-> Partida0852dia 5-> chegada1026 dia5 E190
-AZU5140 SBCT -> Duracao 0045-> Partida1005dia 5-> chegada1050 dia5 AT72
-AZU5112 SBMG -> Duracao 0129-> Partida1114dia 5-> chegada1243 dia5 AT72
-AZU5113 SBKP -> Duracao 0116-> Partida1320dia 5-> chegada1436 dia5 AT72
-AZU5121 SBKP -> Duracao 0103-> Partida1335dia 5-> chegada1438 dia5 AT72
-AZU5138 SBPF -> Duracao 0122-> Partida1422dia 5-> chegada1544 dia5 E190
-AZU5122 SBCA -> Duracao 0148-> Partida1558dia 5-> chegada1746 dia5 AT72
-AZU5108 SBCT -> Duracao 0052-> Partida1559dia 5-> chegada1651 dia5 E190
-AZU5139 SBKP -> Duracao 0108-> Partida1625dia 5-> chegada1733 dia5 E190
-AZU5110 SBBR -> Duracao 0122-> Partida1640dia 5-> chegada182 dia5 E190
-AZU5129 SBCT -> Duracao 0045-> Partida1745dia 5-> chegada1830 dia5 AT72
-AZU5119 SBCF -> Duracao 0114-> Partida1828dia 5-> chegada1942 dia5 E190
-AZU5123 SBKP -> Duracao 0142-> Partida1923dia 5-> chegada215 dia5 AT72
-AZU5130 SBAE -> Duracao 0048-> Partida2325dia 5-> chegada0013 dia6 AT72
-AZU5141 SBLO -> Duracao 0104-> Partida0023dia 6-> chegada0127 dia6 AT72
-AZU5132 SBGR -> Duracao 0050-> Partida0111dia 6-> chegada021 dia6 E190
-AZU5127 SBSV -> Duracao 0123-> Partida0131dia 6-> chegada0254 dia6 E190
-AZU5131 SBKP -> Duracao 0048-> Partida0850dia 6-> chegada0938 dia6 AT72
-AZU5126 SBCF -> Duracao 0134-> Partida0852dia 6-> chegada1026 dia6 E190
-AZU5140 SBCT -> Duracao 0045-> Partida1005dia 6-> chegada1050 dia6 AT72
-AZU5118 SBJP -> Duracao 0251-> Partida1244dia 6-> chegada1535 dia6 E190
-AZU5136 SBPK -> Duracao 0046-> Partida1452dia 6-> chegada1538 dia6 AT72
-AZU5124 SBRF -> Duracao 0204-> Partida1500dia 6-> chegada174 dia6 E190
-AZU5101 SBSP -> Duracao 0050-> Partida1625dia 6-> chegada1715 dia6 E190
-AZU5110 SBBR -> Duracao 0122-> Partida1640dia 6-> chegada182 dia6 E190
-AZU5142 SBGO -> Duracao 0118-> Partida1708dia 6-> chegada1826 dia6 E190
-AZU5102 SBGO -> Duracao 0136-> Partida1847dia 6-> chegada2023 dia6 E190
-AZU5115 SBGR -> Duracao 0111-> Partida2205dia 6-> chegada2316 dia6 E190
-AZU5100 SBRJ -> Duracao 0540-> Partida2355dia 6-> chegada0535 dia7 E190
-AZU5134 SBKP -> Duracao 0101-> Partida1000dia 7-> chegada111 dia7 E190
-AZU5118 SBJP -> Duracao 0251-> Partida1244dia 7-> chegada1535 dia7 E190
-AZU5103 SBRJ -> Duracao 0133-> Partida1341dia 7-> chegada1514 dia7 E190
-AZU5122 SBCA -> Duracao 0148-> Partida1558dia 7-> chegada1746 dia7 AT72
-AZU5104 SBPS -> Duracao 0113-> Partida1626dia 7-> chegada1739 dia7 E190
-AZU5142 SBGO -> Duracao 0118-> Partida1708dia 7-> chegada1826 dia7 E190
-AZU5129 SBCT -> Duracao 0045-> Partida1745dia 7-> chegada1830 dia7 AT72
-AZU5105 SBRJ -> Duracao 0132-> Partida1830dia 7-> chegada202 dia7 E190
-AZU5123 SBKP -> Duracao 0142-> Partida1923dia 7-> chegada215 dia7 AT72
-AZU5106 SBCF -> Duracao 0055-> Partida1925dia 7-> chegada2020 dia7 E190
-AZU5125 SBGR -> Duracao 0111-> Partida2155dia 7-> chegada236 dia7 E190
-AZU5130 SBAE -> Duracao 0048-> Partida2325dia 7-> chegada0013 dia8 AT72
-tamanho 29
-posicao randomica 19
-tamanho 37
-posicao randomica 7
-tamanho 37
-posicao randomica 24
-tamanho 29
-posicao randomica 29
-tamanho 37
-posicao randomica 30
-tamanho 29
-posicao randomica 15
-tamanho 29
-posicao randomica 14
-tamanho 29
-posicao randomica 3
-tamanho 29
-posicao randomica 12
-tamanho 37
-posicao randomica 25
-tamanho 29
-posicao randomica 15
-tamanho 37
-posicao randomica 36
-tamanho 37
-posicao randomica 29
-tamanho 37
-posicao randomica 30
-tamanho 29
-posicao randomica 25
-tamanho 37
-posicao randomica 2
-tamanho 37
-posicao randomica 3
-tamanho 29
-posicao randomica 9
-tamanho 29
-posicao randomica 15
-tamanho 29
-posicao randomica 29
-tamanho 37
-posicao randomica 20
-tamanho 37
-posicao randomica 9
-tamanho 29
-posicao randomica 28
-tamanho 37
-posicao randomica 25
-tamanho 29
-posicao randomica 20
-tamanho 29
-posicao randomica 27
-tamanho 29
-posicao randomica 20
-tamanho 29
-posicao randomica 7
-tamanho 37
-posicao randomica 16
-tamanho 29
-posicao randomica 17
-tamanho 37
-posicao randomica 16
-tamanho 37
-posicao randomica 34
-tamanho 37
-posicao randomica 11
-tamanho 29
-posicao randomica 24
-tamanho 37
-posicao randomica 12
-tamanho 37
-posicao randomica 14
-tamanho 29
-posicao randomica 25
-tamanho 29
-posicao randomica 17
-tamanho 29
-posicao randomica 28
-tamanho 37
-posicao randomica 26
-tamanho 37
-posicao randomica 34
-tamanho 29
-posicao randomica 3
-tamanho 37
-posicao randomica 12
-tamanho 29
-posicao randomica 1
-tamanho 29
-posicao randomica 12
-tamanho 29
-posicao randomica 4
-tamanho 29
-posicao randomica 15
-tamanho 37
-posicao randomica 9
-tamanho 29
-posicao randomica 17
-tamanho 37
-posicao randomica 9
-tamanho 37
-posicao randomica 13
-tamanho 37
-posicao randomica 4
-tamanho 29
-posicao randomica 3
-tamanho 37
-posicao randomica 18
-tamanho 37
-posicao randomica 6
-tamanho 29
-posicao randomica 17
-tamanho 29
-posicao randomica 20
-tamanho 29
-posicao randomica 3
-tamanho 37
-posicao randomica 26
-tamanho 37
-posicao randomica 11
-tamanho 29
-posicao randomica 15
-tamanho 37
-posicao randomica 11
-tamanho 29
-posicao randomica 13
-tamanho 29
-posicao randomica 16
-tamanho 29
-posicao randomica 2
-tamanho 29
-posicao randomica 1
-tamanho 37
-posicao randomica 5
-tamanho 29
-posicao randomica 3
-tamanho 37
-posicao randomica 7
-tamanho 37
-posicao randomica 6
-tamanho 37
-posicao randomica 8
-tamanho 29
-posicao randomica 5
-tamanho 37
-posicao randomica 24
-tamanho 37
-posicao randomica 18
-tamanho 29
-posicao randomica 3
-tamanho 29
-posicao randomica 21
-tamanho 29
-posicao randomica 3
-tamanho 37
-posicao randomica 9
-tamanho 37
-posicao randomica 6
-tamanho 29
-posicao randomica 25
-tamanho 37
-posicao randomica 11
-tamanho 29
-posicao randomica 16
-tamanho 29
-posicao randomica 19
-tamanho 29
-posicao randomica 20
-tamanho 29
-posicao randomica 16
-tamanho 37
-posicao randomica 1
-tamanho 29
-posicao randomica 12
-tamanho 37
-posicao randomica 1
-tamanho 37
-posicao randomica 28
-tamanho 37
-posicao randomica 33
-tamanho 29
-posicao randomica 17
-tamanho 37
-posicao randomica 5
-tamanho 29
-posicao randomica 5
-tamanho 29
-posicao randomica 9
-tamanho 29
-posicao randomica 1
-tamanho 37
-posicao randomica 4
-tamanho 37
-posicao randomica 33
-tamanho 29
-posicao randomica 10
-tamanho 37
-posicao randomica 21
-tamanho 29
-posicao randomica 12
-tamanho 37
-posicao randomica 29
-tamanho 29
-posicao randomica 5
-tamanho 37
-posicao randomica 27
-tamanho 37
-posicao randomica 33
-tamanho 37
-posicao randomica 23
-tamanho 37
-posicao randomica 1
-tamanho 37
-posicao randomica 27
-tamanho 37
-posicao randomica 10
-tamanho 37
-posicao randomica 13
-tamanho 37
-posicao randomica 34
-tamanho 37
-posicao randomica 12
-tamanho 37
-posicao randomica 16
-tamanho 29
-posicao randomica 1
-tamanho 37
-posicao randomica 32
-tamanho 37
-posicao randomica 15
-tamanho 29
-posicao randomica 29
-tamanho 37
-posicao randomica 9
-tamanho 29
-posicao randomica 23
-tamanho 37
-posicao randomica 11
-tamanho 37
-posicao randomica 22
-tamanho 29
-posicao randomica 14
-numero de voos realizados 121
+inicio do programa
+
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual NONE
+codigo do aviao PRENM
+voo inuteis0
+voos realizados :0 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual NONE
+codigo do aviao PTFGM
+voo inuteis0
+voos realizados :0 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual NONE
+codigo do aviao PTENM
+voo inuteis0
+voos realizados :0 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual NONE
+codigo do aviao PRFGM
+voo inuteis0
+voos realizados :0 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PRFGM
+voo inuteis1
+voos realizados :1 AZU0008 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PTENM
+voo inuteis1
+voos realizados :1 AZU0007 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PTENM
+voo inuteis2
+voos realizados :2 AZU0007 AZU0008 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PRFGM
+voo inuteis2
+voos realizados :2 AZU0008 AZU0007 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PTFGM
+voo inuteis1
+voos realizados :1 AZU0008 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PRENM
+voo inuteis1
+voos realizados :1 AZU0007 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PTENM
+voo inuteis3
+voos realizados :3 AZU0007 AZU0008 AZU0007 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PTENM
+voo inuteis3
+voos realizados :4 AZU0007 AZU0008 AZU0007 AZU0007 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBMK
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PTFGM
+voo inuteis2
+voos realizados :2 AZU0008 AZU0007 
+------------FIM-------------
+
+
+ NAO CONSEGUIU ACHAR AVIAO NO AEROPORTO
+Aeroporto que chamou o voo  SBCF
+aviao sorteado
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PTFGM
+voo inuteis2
+voos realizados :3 AZU0008 AZU0007 AZU0007 
+------------FIM-------------
+
+numero de voos realizados 0tipo aviao E190
+
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PTFGM
+voo inuteis3
+voos realizados :4 AZU0008 AZU0007 AZU0007 AZU0008 
+------------FIM-------------
+
+
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PTENM
+voo inuteis4
+voos realizados :5 AZU0007 AZU0008 AZU0007 AZU0007 AZU0008 
+------------FIM-------------
+
+
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PRFGM
+voo inuteis3
+voos realizados :3 AZU0008 AZU0007 AZU0008 
+------------FIM-------------
+
+
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PRENM
+voo inuteis2
+voos realizados :2 AZU0007 AZU0008 
+------------FIM-------------
+
