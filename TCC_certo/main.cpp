@@ -53,7 +53,6 @@ string hora = "0000";
 // Parametro que faz com que sorteie do aeroporto atual ou de qq aeroporto caso falso
 bool SORTEIA_DO_AEROPORTO = false;
 
-
 void iniciaParametros() {
     int numeroGeracoes;
     int tamanhoPopulacao;
@@ -64,7 +63,7 @@ void iniciaParametros() {
 
 
 int sorteiaAviao(vector<Aviao > v, string aero);
-void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo);
+void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo, int dia_voo);
 void apagaAvioesDisponiveis(int posicao);
 void imprimiString(string a);
 void lerArquivo();
@@ -88,15 +87,17 @@ void preencheAgenda();
 bool comparaString(string a, string b);
 string trataString(string a);
 void imprimiFrotaAtribuida();
-void imprimi_avioes();
+void gera_individuo(string indice);
+void gera_populacao_inicial(int tam);
+void cruzamento(int tam);
+
 
 void imprimiAviao(Aviao a);
 string calcula_Hora_chegada(string d, string h, int dia);
 
 int main() {
-    cout <<"inicio do programa\n\n\n";
-    lerArquivos(); //chamada da funcao para iniciar os parametros
-    checkAirplanes();
+    cout << "inicio do programa\n\n\n";
+
     //imprimiFrotaAtribuida();
     /*
 
@@ -108,9 +109,13 @@ int main() {
     insere_de_volta_disponiveis("92045", "2100");
      */
     //imprimiFrotaAtribuida();
+    int tamanho_populacao = 10;
 
-    montaAgenda();
-    imprimi_avioes();
+    // gera_populacao_inicial(tamanho_populacao);
+    cruzamento(tamanho_populacao);
+
+
+
     //imprimiFrotaAtribuida();
     //imprimeAgenda();
     //apagaAvioesDisponiveis(0);
@@ -120,15 +125,55 @@ int main() {
     //cout << individuos.size() << endl;
 }
 
-void imprimi_avioes() {
+void cruzamento(int tamanho) {
+    int i1, i2; // individuos para  o sorteio 
+    std::random_device rd; // only used once to initialise (seed) engine
+    std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)  
+    std::uniform_int_distribution<int> uni(0, 10000000);
+    auto randNumber = uni(rng);
+    i1 = randNumber % tamanho;
+
+    randNumber = uni(rng);
+    i2 = randNumber%tamanho;
+    cout <<"individuos sorteados " << i1 << " e " << i2 << endl;
+
+
+
+}
+
+void gera_populacao_inicial(int tam) {
+
+    for (int i = 0; i < tam; i++) {
+        lerArquivos(); //chamada da funcao para iniciar os parametros
+        checkAirplanes();
+        montaAgenda();
+        gera_individuo(to_string(i));
+        avioes.clear();
+        marca_volta.clear();
+        agenda.clear();
+
+    }
+}
+
+void gera_individuo(string indice) {
     map<string, vector<Aviao> >::iterator it;
-    vector<Aviao> auxAviao;
+    vector<Aviao> a;
+    ofstream file;
+    file.open("individuo_" + indice + ".txt");
     for (it = avioes.begin(); it != avioes.end(); it++) {
-        cout << "tipo aviao " << it->first << endl;
-        auxAviao = it->second;
-        int tam = auxAviao.size();
+        file << "tipo aviao " << it->first << endl;
+        a = it->second;
+        int tam = a.size();
         for (int i = 0; i < tam; i++) {
-            imprimiAviao(auxAviao[i]);
+            file << "\n\n------------AVIAO-------------\n";
+            file << "aeroportoAtual " << a[i].aeroportoAtual << endl;
+            file << "codigo do aviao " << a[i].codigo << endl;
+            file << "voo inuteis" << a[i].vooInuteis << endl;
+            file << "voos realizados :" << a[i].vooRealizados.size() << " ";
+            for (int j = 0; j < a[i].vooRealizados.size(); j++) {
+                file << a[i].vooRealizados[j] << " ";
+            }
+            file << "\n------------FIM-------------\n\n";
 
         }
 
@@ -187,8 +232,6 @@ void lerArquivos() {
                 }
 
             }
-
-
         }
         myfile.close();
     } else cout << "Unable to open file";
@@ -248,10 +291,10 @@ string calcula_Hora_chegada(string d, string h, int dia) {
     int hora_chegada = (int) ((minutostotais) / 60);
     if (hora_chegada >= 24) {
         proximo_dia++;
-        if(hora_chegada) hora_chegada %= 24;
+        if (hora_chegada) hora_chegada %= 24;
     }
     int minutos_chegada;
-    if(minutostotais) minutos_chegada= minutostotais % 60;
+    if (minutostotais) minutos_chegada = minutostotais % 60;
     string hora_certa = to_string((int) hora_chegada);
     if (hora_certa.size() == 1) {
         hora_certa = "0" + hora_certa;
@@ -320,15 +363,7 @@ void imprimeAgenda() {
 }
 
 void imprimiAviao(Aviao a) {
-    cout << "\n\n------------AVIAO-------------\n";
-    cout << "aeroportoAtual " << a.aeroportoAtual << endl;
-    cout << "codigo do aviao " << a.codigo << endl;
-    cout << "voo inuteis" << a.vooInuteis << endl;
-    cout << "voos realizados :" << a.vooRealizados.size() << " ";
-    for (int i = 0; i < a.vooRealizados.size(); i++) {
-        cout << a.vooRealizados[i] << " ";
-    }
-    cout << "\n------------FIM-------------\n\n";
+
 }
 
 void imprimiIndividuo(Individuo ind) {
@@ -412,22 +447,22 @@ void imprimiString(string a) {
     cout << endl;
 }
 
-void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo) {
+void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo, int dia_voo) {
 
     // busca sequencial N*log(N) onde N é o numero de avioes do Tipo que chamou a funcao
     int tam = avioes[TipoAviao].size();
     for (int i = 0; i < tam; i++) {
         if (avioes[TipoAviao][i].codigo.compare(codigoAviao) == 0) {
-            cout <<"aviao sorteado";
-           
+            cout << "aviao sorteado";
+
             imprimiAviao(avioes[TipoAviao][i]);
-            avioes[TipoAviao][i].vooRealizados.push_back(codigoVoo);
+            avioes[TipoAviao][i].vooRealizados.push_back(codigoVoo + "->" + to_string(dia_voo));
             if (avioes[TipoAviao][i].aeroportoAtual.compare(AeroportoDoVoo) != 0) {
                 avioes[TipoAviao][i].vooInuteis++;
 
             }
-            
-            
+
+
             avioes[TipoAviao][i].aeroportoAtual = AeroportoDoVoo;
         }
     }
@@ -440,11 +475,11 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
 
     //cout << "\n\n\n--------comeco da funcaooo-----\n";
     //cout << "TEEEMPOO INICIO = " << tempo_inicio << "TEMPO FIM " << tempo_fim << endl;
-  //  cout << "avioes operando \n";
+    //  cout << "avioes operando \n";
     //mostra_avioes_operacao();
-   // cout << "\n\n";
-  //  cout << "frota antes de verificar \n";
-   // imprimiFrotaAtribuida();
+    // cout << "\n\n";
+    //  cout << "frota antes de verificar \n";
+    // imprimiFrotaAtribuida();
 
 
     int hora_inicio = stoi(tempo_inicio);
@@ -452,10 +487,10 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
     int minuto_inicio = stoi(tempo_inicio);
     int minuto_fim = stoi(tempo_fim);
     int dia_atual = stoi(tempo_inicio);
-    if(minuto_inicio) minuto_inicio= minuto_inicio % 100;
-    if(minuto_fim) minuto_fim= minuto_fim % 100;
-    if(hora_inicio) hora_inicio= (hora_inicio / 100) % 100;
-    if(hora_fim) hora_fim= ((hora_fim) / 100) % 100;
+    if (minuto_inicio) minuto_inicio = minuto_inicio % 100;
+    if (minuto_fim) minuto_fim = minuto_fim % 100;
+    if (hora_inicio) hora_inicio = (hora_inicio / 100) % 100;
+    if (hora_fim) hora_fim = ((hora_fim) / 100) % 100;
     dia_atual /= 10000;
 
     while (true) {
@@ -475,7 +510,7 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
             map<string, vector<aviao_essencial> >::iterator it;
             it = marca_volta.find(volta);
             if (it != marca_volta.end()) {
-              //  cout << "Hora que possui algum aviao para voltar  " << volta << endl;
+                //  cout << "Hora que possui algum aviao para voltar  " << volta << endl;
 
 
                 vector<aviao_essencial> aux;
@@ -486,8 +521,8 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
                     Aviao Aux3;
                     Aux3.codigo = aux2.codigo;
                     //linha que faz o sorteio do aviao no aeroporto
-                    if(SORTEIA_DO_AEROPORTO)
-                    Aux3.aeroportoAtual = aux2.origem;
+                    if (SORTEIA_DO_AEROPORTO)
+                        Aux3.aeroportoAtual = aux2.origem;
                     //cout << "tipo do aviao " << aux2.codigo << " codigo" << Aux3.codigo << endl;
                     avioesDisponiveis[aux2.tipo].push_back(Aux3);
                 }
@@ -501,41 +536,41 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
         }
     }
     //cout << "frota no fim da funcao \n\n";
-  //  imprimiFrotaAtribuida();
-  //  cout << "-------fim da funcao -----------------\n";
+    //  imprimiFrotaAtribuida();
+    //  cout << "-------fim da funcao -----------------\n";
 }
 
 int sorteiaAviao(vector<Aviao > v, string aero) {
-   // cout << "-------funcao de sorteio-----------\n";
+    // cout << "-------funcao de sorteio-----------\n";
     Aviao A;
     // funcao random para gerar numeros aleatorios de forma rapida
     std::random_device rd; // only used once to initialise (seed) engine
     std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)  
     std::uniform_int_distribution<int> uni(0, 10000000);
-   // cout << "Aeroporto atual " << aero << endl;
-    
+    // cout << "Aeroporto atual " << aero << endl;
+
     auto randNumber = uni(rng);
     vector<int> aeroporto_certo;
-    for(int i = 0 ; i < v.size() ; i++){
-        if(v[i].aeroportoAtual.compare(aero) == 0){
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i].aeroportoAtual.compare(aero) == 0) {
             aeroporto_certo.push_back(i);
         }
     }
-    if(aeroporto_certo.size() > 0 ){
+    if (aeroporto_certo.size() > 0) {
         // sortear entre a posicoes;
-        randNumber %= aeroporto_certo.size();    
-       // cout <<"aviao sorteado" << aeroporto_certo[randNumber] << endl;
-       //    cout << "-------fim da funcao de sorteio-----------\n";
+        randNumber %= aeroporto_certo.size();
+        // cout <<"aviao sorteado" << aeroporto_certo[randNumber] << endl;
+        //    cout << "-------fim da funcao de sorteio-----------\n";
         return aeroporto_certo[randNumber];
-        
-        
-    }else{
-         randNumber%=v.size();
-          //  cout << "-------fim da funcao de sorteio-----------\n";
+
+
+    } else {
+        randNumber %= v.size();
+        //  cout << "-------fim da funcao de sorteio-----------\n";
         return randNumber;
     }
-  
-  
+
+
 }
 
 void montaAgenda() {
@@ -561,26 +596,26 @@ void montaAgenda() {
             insere_de_volta_disponiveis(tempo_inicial, agenda[dia][vook].horaPartida);
             string tipoAviao = agenda[dia][vook].tipoAviao;
             string Aero = agenda[dia][vook].origem;
-           
+
             it2 = avioesDisponiveis.find(tipoAviao);
 
-            AviaoAux = it2->second;   
+            AviaoAux = it2->second;
             int randNumber = sorteiaAviao(it2->second, Aero);
             Aviao Av = AviaoAux[randNumber];
-            
-            
+
+
 
             //cria variaveis para inserir no vetor de avioes absolutos
             string codigoA, codigoV;
             codigoA = Av.codigo;
             codigoV = agenda[dia][vook].codigoVoo;
-            cout <<"Aeroporto que chamou o voo  " << Aero << endl;
+            cout << "Aeroporto que chamou o voo  " << Aero << endl;
 
-            insereVooEmAviao(tipoAviao, codigoA, codigoV, Aero);
+            insereVooEmAviao(tipoAviao, codigoA, codigoV, Aero, dia);
             string volta = "";
             volta = to_string(agenda[dia][vook].dia_chegada);
             volta += agenda[dia][vook].horaChegada;
-            
+
             avioesDisponiveis[tipoAviao].erase(avioesDisponiveis[tipoAviao].begin() + (randNumber));
             aviao_essencial X;
             X.codigo = codigoA;

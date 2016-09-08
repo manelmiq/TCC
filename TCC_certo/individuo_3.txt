@@ -1,0 +1,37 @@
+tipo aviao E190
+
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PTFGM
+voo inuteis3
+voos realizados :6 AZU0007->1 AZU0008->1 AZU0008->2 AZU0007->3 AZU0007->4 AZU0007->5 
+------------FIM-------------
+
+
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PTENM
+voo inuteis1
+voos realizados :2 AZU0008->4 AZU0008->5 
+------------FIM-------------
+
+
+
+------------AVIAO-------------
+aeroportoAtual SBCF
+codigo do aviao PRFGM
+voo inuteis3
+voos realizados :3 AZU0008->6 AZU0007->7 AZU0008->7 
+------------FIM-------------
+
+
+
+------------AVIAO-------------
+aeroportoAtual SBMK
+codigo do aviao PRENM
+voo inuteis3
+voos realizados :3 AZU0007->2 AZU0008->3 AZU0007->6 
+------------FIM-------------
+

@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Arquivos de Cabeçalho"
                    projectFiles="true">
+      <itemPath>/home/emmanuell/NetBeansProjects/TCC_certo/nbproject/ga.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
@@ -51,6 +52,11 @@
             tool="0"
             flavor2="0">
       </item>
+      <item path="/home/emmanuell/NetBeansProjects/TCC_certo/nbproject/ga.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOO2.txt"
             ex="false"
             tool="3"
@@ -93,6 +99,11 @@
       <item path="/home/emmanuell/NetBeansProjects/TCC_certo/ga.cpp"
             ex="false"
             tool="0"
+            flavor2="0">
+      </item>
+      <item path="/home/emmanuell/NetBeansProjects/TCC_certo/nbproject/ga.h"
+            ex="false"
+            tool="3"
             flavor2="0">
       </item>
       <item path="/home/emmanuell/Área de Trabalho/TCC-master/TCC/VOO2.txt"
