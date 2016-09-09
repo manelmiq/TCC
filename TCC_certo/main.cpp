@@ -53,6 +53,7 @@ vector<Individuo> individuos;
 int proximo_dia;
 string hora = "0000";
 
+const double alfa = 1.0, beta = 1.0;
 // Parametro que faz com que sorteie do aeroporto atual ou de qq aeroporto caso falso
 bool SORTEIA_DO_AEROPORTO = false;
 
@@ -107,7 +108,8 @@ int main() {
     aviao_essencial aux;
     aux.codigo ="blabla";
     aux.tipo= "E190";
-    marca_volta["92047"].push_back(aux);
+    marca_volta["92047"].push_back
+     * (aux);
     marca_volta["92047"].push_back(aux);
     insere_de_volta_disponiveis("92045", "2100");
      */
@@ -126,6 +128,25 @@ int main() {
 
     //imprimiIndividuos();
     //cout << individuos.size() << endl;
+}
+
+double calculaFitness(vector<Aviao>&ind){
+    int maxVoos, minVoos,voosInuteis=0;
+    maxVoos=minVoos=ind[0].vooRealizados.size();
+    
+    for(int i=1;i<ind.size();++i){
+        voosInuteis+=ind[i].vooInuteis;
+        if(ind[i].vooRealizados.size()>maxVoos){
+            maxVoos=ind[i].vooRealizados.size();
+        }
+        else if(ind[i].vooRealizados.size()<minVoos){
+            minVoos=ind[i].vooRealizados.size();
+        }
+    }
+    
+    double fitness=(alfa*(double)(maxVoos-minVoos)+beta*(voosInuteis));
+    
+    return fitness;
 }
 
 void cruzamento(int tamanho) {
