@@ -40,9 +40,12 @@ struct aviao_essencial {
 };
 
 //no vetor de avioes vao ficar salvo os avioes em valores absolutas nao podendo deletar nenhum aviao
+
 map<string, vector<Aviao> > avioes;
 //o map de avioes disponiveis é apenas um artificio auxiliar para conseguir manipular a atribuiçoes de voos
 map<string, vector<Aviao> > avioesDisponiveis;
+
+vector < map <string, vector<Aviao> > > pop;
 
 map<string, vector<aviao_essencial> > marca_volta;
 map<int, vector<Voo> > agenda;
@@ -111,7 +114,7 @@ int main() {
     //imprimiFrotaAtribuida();
     int tamanho_populacao = 10;
 
-    // gera_populacao_inicial(tamanho_populacao);
+    gera_populacao_inicial(tamanho_populacao);
     cruzamento(tamanho_populacao);
 
 
@@ -134,20 +137,44 @@ void cruzamento(int tamanho) {
     i1 = randNumber % tamanho;
 
     randNumber = uni(rng);
-    i2 = randNumber%tamanho;
-    cout <<"individuos sorteados " << i1 << " e " << i2 << endl;
+    i2 = randNumber % tamanho;
+    cout << "individuos sorteados " << i1 << " e " << i2 << endl;
 
 
 
 }
+/*
+double calculaFitness() {
+    map<string, vector<Aviao> >::iterator it;
+    vector<Aviao> auxAviao;
+    int minVoos, maxVoos, voosInuteis = 0;
 
+    for (it = avioes.begin(); it != avioes.end(); it++) {
+
+        auxAviao = it->second;
+
+        minVoos = auxAviao[0].vooRealizados.size();
+        maxVoos = auxAviao[0].vooRealizados.size();
+
+        voosInuteis += auxAviao[0].vooInuteis;
+
+        for (int i = 1; i < auxAviao.size(); ++i) {
+            voosInuteis += auxAviao[i].vooInuteis;
+            if (auxAviao[i].vooRealizados.size() < minVoos)minVoos = auxAviao[0].vooRealizados.size();
+            else if (auxAviao[i].vooRealizados.size() > maxVoos)maxVoos = auxAviao[0].vooRealizados.size();
+        }
+    }
+    return (alfa * (double) (maxVoos - minVoos) + beta * (double) voosInuteis);
+}
+*/
+ 
 void gera_populacao_inicial(int tam) {
 
     for (int i = 0; i < tam; i++) {
         lerArquivos(); //chamada da funcao para iniciar os parametros
         checkAirplanes();
         montaAgenda();
-        gera_individuo(to_string(i));
+        pop.push_back(avioes);
         avioes.clear();
         marca_volta.clear();
         agenda.clear();
