@@ -12,14 +12,6 @@ struct Individuo {
     string partida;
 };
 
-struct Aviao {
-    string tipo;
-    string codigo;
-    string aeroportoAtual;
-    vector<string> vooRealizados;
-    int vooInuteis;
-};
-
 struct Voo {
     string origem;
     string horaPartida;
@@ -33,10 +25,18 @@ struct Voo {
 
 };
 
+struct Aviao {
+    string tipo;
+    string codigo;
+    string aeroportoAtual;
+    vector<Voo> vooRealizados;
+    int vooInuteis;
+};
+
 struct aviao_essencial {
     string codigo;
     string tipo;
-    string origem;
+    string destino;
 };
 
 //no vetor de avioes vao ficar salvo os avioes em valores absolutas nao podendo deletar nenhum aviao
@@ -66,7 +66,7 @@ void iniciaParametros() {
 
 
 int sorteiaAviao(vector<Aviao > v, string aero);
-void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo, int dia_voo);
+void insereVooEmAviao(string TipoAviao, string codigoAviao, Voo voo_completo);
 void apagaAvioesDisponiveis(int posicao);
 void imprimiString(string a);
 void lerArquivo();
@@ -92,8 +92,9 @@ string trataString(string a);
 void imprimiFrotaAtribuida();
 void gera_individuo(string indice);
 void gera_populacao_inicial(int tam);
-void cruzamento(int tam);
-
+void cruzamento(map<string, vector<Aviao > > a, map<string, vector<Aviao > > b);
+void geracoes(int nGeracoes);
+void gera_individuo(map<string, vector<Aviao > > av, string indice);
 
 void imprimiAviao(Aviao a);
 string calcula_Hora_chegada(string d, string h, int dia);
@@ -115,7 +116,8 @@ int main() {
     int tamanho_populacao = 10;
 
     gera_populacao_inicial(tamanho_populacao);
-    cruzamento(tamanho_populacao);
+    cruzamento(pop[0], pop[1]);
+    //geracoes(10);
 
 
 
@@ -128,21 +130,62 @@ int main() {
     //cout << individuos.size() << endl;
 }
 
-void cruzamento(int tamanho) {
-    int i1, i2; // individuos para  o sorteio 
+void cruzamento(map<string, vector< Aviao > > a, map<string, vector<Aviao > > b) {
+
+    cout << "chamou a funcao cruzamento " << endl;
+    map<string, vector< Aviao > >::iterator it, it2;
     std::random_device rd; // only used once to initialise (seed) engine
     std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)  
     std::uniform_int_distribution<int> uni(0, 10000000);
-    auto randNumber = uni(rng);
-    i1 = randNumber % tamanho;
+    int randNumber;
+    // fazer um cruzamento com todos os tipos de avioes
 
-    randNumber = uni(rng);
-    i2 = randNumber % tamanho;
-    cout << "individuos sorteados " << i1 << " e " << i2 << endl;
+    map<string, vector< Aviao > > novo_individuo;
+    string tipo;
+    for (it = a.begin(), it2 = b.begin(); it != a.end(), it2 != b.end(); it++, it2++) {
+
+        // a1, e a2 recebem os voos ja atribuidos de 2 agendas difernetes e a3 vai ser o resultado do cruzamento dos 2
+        vector<Aviao> a1, a2, a3;
+        a1 = it->second;
+        a2 = it2->second;
+        tipo = it->first;
+        vector<int> copias(a1.size(), 0);
+        int sorteios = copias.size() / 2;
+        while (sorteios--) {
+            auto randNumber = uni(rng);
+            randNumber %= copias.size();
+            copias[randNumber]++;
+
+        }
 
 
+        for (int k = 0; k < a1.size(); k++) {
 
+            // escolhe no minimo a metade dos genes dos pais para o novo individuo
+            cout <<copias[k];
+            if (copias[k]) {
+                auto randNumber = uni(rng);
+                if (randNumber % 2) {
+                    cout <<"b";
+                    novo_individuo[tipo].push_back(a1[k]);
+
+                } else {
+                    cout<<"a";
+                    novo_individuo[tipo].push_back(a2[k]);
+                }
+            } else {
+                a1[k].vooRealizados.clear();
+                novo_individuo[tipo].push_back(a1[k]);
+                // limpa os voos realizados
+            }
+           
+        }
+         gera_individuo(novo_individuo, "3");
+
+    }
 }
+
+
 /*
 double calculaFitness() {
     map<string, vector<Aviao> >::iterator it;
@@ -166,8 +209,8 @@ double calculaFitness() {
     }
     return (alfa * (double) (maxVoos - minVoos) + beta * (double) voosInuteis);
 }
-*/
- 
+ */
+
 void gera_populacao_inicial(int tam) {
 
     for (int i = 0; i < tam; i++) {
@@ -175,6 +218,7 @@ void gera_populacao_inicial(int tam) {
         checkAirplanes();
         montaAgenda();
         pop.push_back(avioes);
+        gera_individuo(avioes, to_string(i));
         avioes.clear();
         marca_volta.clear();
         agenda.clear();
@@ -182,12 +226,12 @@ void gera_populacao_inicial(int tam) {
     }
 }
 
-void gera_individuo(string indice) {
+void gera_individuo(map<string, vector<Aviao > > av, string indice) {
     map<string, vector<Aviao> >::iterator it;
     vector<Aviao> a;
     ofstream file;
     file.open("individuo_" + indice + ".txt");
-    for (it = avioes.begin(); it != avioes.end(); it++) {
+    for (it = av.begin(); it != av.end(); it++) {
         file << "tipo aviao " << it->first << endl;
         a = it->second;
         int tam = a.size();
@@ -198,7 +242,7 @@ void gera_individuo(string indice) {
             file << "voo inuteis" << a[i].vooInuteis << endl;
             file << "voos realizados :" << a[i].vooRealizados.size() << " ";
             for (int j = 0; j < a[i].vooRealizados.size(); j++) {
-                file << a[i].vooRealizados[j] << " ";
+                file << a[i].vooRealizados[j].codigoVoo << " " << a[i].vooRealizados[j].dia_partida;
             }
             file << "\n------------FIM-------------\n\n";
 
@@ -424,7 +468,7 @@ bool checkAirplanes() {
             aux.codigo = codigo;
             aux.tipo = tipo;
             aux.aeroportoAtual = "NONE";
-            aux.vooInuteis = 0;
+            aux.vooInuteis = -1; // desconta o primeiro voo
             //cout <<"Codigo do aviao " << tipo<< endl;
             avioesDisponiveis[tipo].push_back(aux);
             avioes[tipo].push_back(aux);
@@ -474,23 +518,22 @@ void imprimiString(string a) {
     cout << endl;
 }
 
-void insereVooEmAviao(string TipoAviao, string codigoAviao, string codigoVoo, string AeroportoDoVoo, int dia_voo) {
+void insereVooEmAviao(string TipoAviao, string codigoAviao, Voo voo_completo) {
 
     // busca sequencial N*log(N) onde N é o numero de avioes do Tipo que chamou a funcao
     int tam = avioes[TipoAviao].size();
     for (int i = 0; i < tam; i++) {
         if (avioes[TipoAviao][i].codigo.compare(codigoAviao) == 0) {
-            cout << "aviao sorteado";
+            //cout << "aviao sorteado";
 
-            imprimiAviao(avioes[TipoAviao][i]);
-            avioes[TipoAviao][i].vooRealizados.push_back(codigoVoo + "->" + to_string(dia_voo));
-            if (avioes[TipoAviao][i].aeroportoAtual.compare(AeroportoDoVoo) != 0) {
+            // imprimiAviao(avioes[TipoAviao][i]);
+            avioes[TipoAviao][i].vooRealizados.push_back(voo_completo);
+            if (avioes[TipoAviao][i].aeroportoAtual.compare(voo_completo.origem) != 0) {
                 avioes[TipoAviao][i].vooInuteis++;
 
             }
 
-
-            avioes[TipoAviao][i].aeroportoAtual = AeroportoDoVoo;
+            avioes[TipoAviao][i].aeroportoAtual = voo_completo.destino;
         }
     }
 
@@ -549,7 +592,7 @@ void insere_de_volta_disponiveis(string tempo_inicio, string tempo_fim) {
                     Aux3.codigo = aux2.codigo;
                     //linha que faz o sorteio do aviao no aeroporto
                     if (SORTEIA_DO_AEROPORTO)
-                        Aux3.aeroportoAtual = aux2.origem;
+                        Aux3.aeroportoAtual = aux2.destino;
                     //cout << "tipo do aviao " << aux2.codigo << " codigo" << Aux3.codigo << endl;
                     avioesDisponiveis[aux2.tipo].push_back(Aux3);
                 }
@@ -636,9 +679,9 @@ void montaAgenda() {
             string codigoA, codigoV;
             codigoA = Av.codigo;
             codigoV = agenda[dia][vook].codigoVoo;
-            cout << "Aeroporto que chamou o voo  " << Aero << endl;
+            //cout << "Aeroporto que chamou o voo  " << Aero << endl;
 
-            insereVooEmAviao(tipoAviao, codigoA, codigoV, Aero, dia);
+            insereVooEmAviao(tipoAviao, codigoA, agenda[dia][vook]);
             string volta = "";
             volta = to_string(agenda[dia][vook].dia_chegada);
             volta += agenda[dia][vook].horaChegada;
@@ -647,7 +690,7 @@ void montaAgenda() {
             aviao_essencial X;
             X.codigo = codigoA;
             X.tipo = tipoAviao;
-            X.origem = agenda[dia][vook].origem;
+            X.destino = agenda[dia][vook].destino;
             marca_volta[volta].push_back(X);
             tempo_inicial = to_string(dia) + agenda[dia][vook].horaPartida;
 
@@ -656,5 +699,4 @@ void montaAgenda() {
         insere_de_volta_disponiveis(tempo_inicial, "2359");
 
     }
-    cout << "numero de voos realizados " << contador;
 }
