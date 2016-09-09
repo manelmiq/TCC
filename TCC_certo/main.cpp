@@ -142,11 +142,16 @@ double calculaFitness(vector<Aviao>&ind){
         else if(ind[i].vooRealizados.size()<minVoos){
             minVoos=ind[i].vooRealizados.size();
         }
-    }
-    
+    }    
     double fitness=(alfa*(double)(maxVoos-minVoos)+beta*(voosInuteis));
-    
     return fitness;
+}
+
+void Mutacao(vector<Aviao>&ind){
+    int fleet, voo;
+    fleet = rand()%ind.size();
+    voo = rand()%ind[fleet].vooRealizados.size();
+    
 }
 
 void cruzamento(int tamanho) {
