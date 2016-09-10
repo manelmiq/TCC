@@ -168,7 +168,7 @@ void factibilityRepair(vector<Aviao>&ind){//Verifica e restaura a factbilidade
                 for(int k=j;k<numVo;++k){//Apagando final do vector para recolocação
                     ind[i].vooRealizados.pop_back();
                 }
-
+                if(ind[i].vooRealizados[ind[i].vooRealizados.size()-1].destino.compare(aux1[0].origem)!=0)ind[i].vooInuteis+=1;
                 for(int k=0;k<aux1.size();++k){//Apagando final do vector para recolocação
                     ind[i].vooRealizados.push_back(aux1[k]);
                 }
@@ -178,6 +178,8 @@ void factibilityRepair(vector<Aviao>&ind){//Verifica e restaura a factbilidade
                         for(int l=0;l<ind[ran].vooRealizados.size()-1;++l){
                             if(ind[ran].vooRealizados[l].horaChegada.compare(ind[i].vooRealizados[j].horaPartida)<0&&ind[ran].vooRealizados[l+1].horaChegada.compare(ind[i].vooRealizados[j].horaPartida)>0){
                                 ind[ran].vooRealizados.insert(ind[ran].vooRealizados.begin()+l+1,aux3);
+                                if(ind[ran].vooRealizados[l].destino.compare(ind[ran].vooRealizados[l+1].origem)!=0) ind[ran].vooInuteis+=1;
+                                if(ind[ran].vooRealizados[l+2].destino.compare(ind[ran].vooRealizados[l+1].origem)!=0) ind[ran].vooInuteis+=1;
                                 corrigido=true;
                                 break;
                             }
