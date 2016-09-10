@@ -102,6 +102,7 @@ string calcula_Hora_chegada(string d, string h, int dia);
 
 int main() {
     cout << "inicio do programa\n\n\n";
+    srand(time(NULL));
 
     //imprimiFrotaAtribuida();
     /*
@@ -132,11 +133,11 @@ int main() {
     //cout << individuos.size() << endl;
 }
 
-<<<<<<< HEAD
+
 double calculaFitness(vector<Aviao>&ind){
     int maxVoos, minVoos,voosInuteis=0;
     maxVoos=minVoos=ind[0].vooRealizados.size();
-    
+
     for(int i=1;i<ind.size();++i){
         voosInuteis+=ind[i].vooInuteis;
         if(ind[i].vooRealizados.size()>maxVoos){
@@ -145,28 +146,69 @@ double calculaFitness(vector<Aviao>&ind){
         else if(ind[i].vooRealizados.size()<minVoos){
             minVoos=ind[i].vooRealizados.size();
         }
-    }    
+    }
     double fitness=(alfa*(double)(maxVoos-minVoos)+beta*(voosInuteis));
     return fitness;
 }
+
+void factibilityRepair(vector<Aviao>&ind){//Verifica e restaura a factbilidade
+    int numAv=ind.size(),numVo,ran;
+    vector<Voo>aux1,aux2;
+    Voo aux3;
+    bool corrigido;
+    for(int i=0;i<numAv;++i){
+        numVo=ind[i].vooRealizados.size();
+        for(int j=1;j<numVo;++j){
+            if(ind[i].vooRealizados[j].horaPartida.compare(ind[i].vooRealizados[j-1].horaChegada)>=0){
+                for(int k=j+1;k<numVo;++k){//guardo a parte restante do vector
+                    aux1.push_back(ind[i].vooRealizados[k]);
+                    corrigido=false;
+                }
+                aux3=ind[i].vooRealizados[j];
+                for(int k=j;k<numVo;++k){//Apagando final do vector para recolocação
+                    ind[i].vooRealizados.pop_back();
+                }
+
+                for(int k=0;k<aux1.size();++k){//Apagando final do vector para recolocação
+                    ind[i].vooRealizados.push_back(aux1[k]);
+                }
+                while(!corrigido){
+                    ran=rand()%numAv;
+                    if(ran!=i){
+                        for(int l=0;l<ind[ran].vooRealizados.size()-1;++l){
+                            if(ind[ran].vooRealizados[l].horaChegada.compare(ind[i].vooRealizados[j].horaPartida)<0&&ind[ran].vooRealizados[l+1].horaChegada.compare(ind[i].vooRealizados[j].horaPartida)>0){
+                                ind[ran].vooRealizados.insert(ind[ran].vooRealizados.begin()+l+1,aux3);
+                                corrigido=true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+}
+
 
 void Mutacao(vector<Aviao>&ind){
     int fleet, voo;
     fleet = rand()%ind.size();
     voo = rand()%ind[fleet].vooRealizados.size();
-    
+
 }
 
 void cruzamento(int tamanho) {
-    int i1, i2; // individuos para  o sorteio 
-=======
+    int i1, i2; // individuos para  o sorteio
+}
+
 void cruzamento(map<string, vector< Aviao > > a, map<string, vector<Aviao > > b) {
 
     cout << "chamou a funcao cruzamento " << endl;
     map<string, vector< Aviao > >::iterator it, it2;
->>>>>>> origin/master
     std::random_device rd; // only used once to initialise (seed) engine
-    std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)  
+    std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)
     std::uniform_int_distribution<int> uni(0, 10000000);
     int randNumber;
     // fazer um cruzamento com todos os tipos de avioes
@@ -209,7 +251,7 @@ void cruzamento(map<string, vector< Aviao > > a, map<string, vector<Aviao > > b)
                 novo_individuo[tipo].push_back(a1[k]);
                 // limpa os voos realizados
             }
-           
+
         }
          gera_individuo(novo_individuo, "3");
 
@@ -358,7 +400,7 @@ void lerArquivos() {
             cout << agenda[i][j].horaChegada << " dia";
             cout << agenda[i][j].dia_chegada << " "    ;
             cout << agenda[i][j].tipoAviao << endl;
-            
+
         }
          */
 
@@ -646,7 +688,7 @@ int sorteiaAviao(vector<Aviao > v, string aero) {
     Aviao A;
     // funcao random para gerar numeros aleatorios de forma rapida
     std::random_device rd; // only used once to initialise (seed) engine
-    std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)  
+    std::mt19937 rng(rd()); // random-number engine used (Mersenne-Twister in this case)
     std::uniform_int_distribution<int> uni(0, 10000000);
     // cout << "Aeroporto atual " << aero << endl;
 
