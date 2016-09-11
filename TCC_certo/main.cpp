@@ -151,48 +151,6 @@ double calculaFitness(vector<Aviao>&ind){
     return fitness;
 }
 
-void factibilityRepair(vector<Aviao>&ind){//Verifica e restaura a factbilidade
-    int numAv=ind.size(),numVo,ran;
-    vector<Voo>aux1,aux2;
-    Voo aux3;
-    bool corrigido;
-    for(int i=0;i<numAv;++i){
-        numVo=ind[i].vooRealizados.size();
-        for(int j=numVoo;j>0;++j){
-            if(ind[i].vooRealizados[j].horaPartida.compare(ind[i].vooRealizados[j-1].horaChegada)>=0){
-                for(int k=j+1;k<numVo;++k){//guardo a parte restante do vector
-                    aux1.push_back(ind[i].vooRealizados[k]);
-                    corrigido=false;
-                }
-                aux3=ind[i].vooRealizados[j];
-                for(int k=j;k<numVo;++k){//Apagando final do vector para recolocação
-                    ind[i].vooRealizados.pop_back();
-                }
-                if(ind[i].vooRealizados[ind[i].vooRealizados.size()-1].destino.compare(aux1[0].origem)!=0)ind[i].vooInuteis+=1;
-                for(int k=0;k<aux1.size();++k){//Apagando final do vector para recolocação
-                    ind[i].vooRealizados.push_back(aux1[k]);
-                }
-                while(!corrigido){
-                    ran=rand()%numAv;
-                    if(ran!=i){
-                        for(int l=0;l<ind[ran].vooRealizados.size()-1;++l){
-                            if(ind[ran].vooRealizados[l].horaChegada.compare(ind[i].vooRealizados[j].horaPartida)<0&&ind[ran].vooRealizados[l+1].horaChegada.compare(ind[i].vooRealizados[j].horaPartida)>0){
-                                ind[ran].vooRealizados.insert(ind[ran].vooRealizados.begin()+l+1,aux3);
-                                if(ind[ran].vooRealizados[l].destino.compare(ind[ran].vooRealizados[l+1].origem)!=0) ind[ran].vooInuteis+=1;
-                                if(ind[ran].vooRealizados[l+2].destino.compare(ind[ran].vooRealizados[l+1].origem)!=0) ind[ran].vooInuteis+=1;
-                                corrigido=true;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-}
-
 void Mutacao(vector<Aviao>&ind) {
     int fleet,fleet2, voo;
     vector<Voo>subAgenda1,subAgenda2;
@@ -221,7 +179,6 @@ void Mutacao(vector<Aviao>&ind) {
     }
     
             
-       factibilityRepair(ind);  
             
 }
 
