@@ -158,7 +158,7 @@ void factibilityRepair(vector<Aviao>&ind){//Verifica e restaura a factbilidade
     bool corrigido;
     for(int i=0;i<numAv;++i){
         numVo=ind[i].vooRealizados.size();
-        for(int j=1;j<numVo;++j){
+        for(int j=numVoo;j>0;++j){
             if(ind[i].vooRealizados[j].horaPartida.compare(ind[i].vooRealizados[j-1].horaChegada)>=0){
                 for(int k=j+1;k<numVo;++k){//guardo a parte restante do vector
                     aux1.push_back(ind[i].vooRealizados[k]);
@@ -193,12 +193,36 @@ void factibilityRepair(vector<Aviao>&ind){//Verifica e restaura a factbilidade
 
 }
 
-
-void Mutacao(vector<Aviao>&ind){
-    int fleet, voo;
-    fleet = rand()%ind.size();
-    voo = rand()%ind[fleet].vooRealizados.size();
-
+void Mutacao(vector<Aviao>&ind) {
+    int fleet,fleet2, voo;
+    vector<Voo>subAgenda1,subAgenda2;
+    
+    
+    fleet = rand() % ind.size();
+    voo = rand() % ind[fleet].vooRealizados.size();
+    
+    for(int j=voo;j<ind[fleet].vooRealizados.size();++j){
+        subAgenda1.push_back(ind[fleet].vooRealizados[j]);
+    } 
+    
+    fleet2 = rand() % ind.size();
+    voo = rand() % ind[fleet2].vooRealizados.size();
+    
+    for(int j=voo;j<ind[fleet2].vooRealizados.size();++j){
+        subAgenda2.push_back(ind[fleet2].vooRealizados[j]);
+    } 
+    
+    for(int i=0;i<subAgenda2.size();++i){
+        ind[fleet].vooRealizados.push_back(subAgenda2[i]);
+    }
+    
+    for(int i=0;i<subAgenda1.size();++i){
+        ind[fleet2].vooRealizados.push_back(subAgenda1[i]);
+    }
+    
+            
+       factibilityRepair(ind);  
+            
 }
 
 void cruzamento(int tamanho) {
